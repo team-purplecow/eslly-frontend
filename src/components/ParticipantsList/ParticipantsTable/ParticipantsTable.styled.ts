@@ -6,17 +6,6 @@ interface Props {
   textColor?: string;
 }
 
-export const TableContainer = styled.div`
-  flex: 2;
-  background-color: ${colorSet.black0};
-  padding: 0.5em 1em;
-  border-radius: 2em;
-`;
-export const TableTitle = styled.h3`
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 2em;
-`;
 export const TableBadge = styled.button<Props>`
   padding: 0.6em 1em;
   border: none;
@@ -81,4 +70,29 @@ export const TableBody = styled.tbody`
   border-top-width: 1px;
   border-bottom-width: 0px;
   border-color: rgb(229 231 235);
+`;
+
+export const ParticipantsContainer = styled.div`
+  flex: 2;
+  padding: 2em;
+  background-color: #f1f2f4;
+`;
+
+export const TableContainer = styled.div`
+  flex: 2;
+  background-color: ${colorSet.black0};
+  padding: 0.5em 2em;
+  border-radius: 2em;
+`;
+
+export const TableHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2em;
+`;
+
+export const TableTitle = styled.h3`
+  font-size: 26px;
+  font-weight: 600;
 `;

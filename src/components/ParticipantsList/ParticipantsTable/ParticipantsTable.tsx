@@ -1,45 +1,15 @@
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
-
 import {
   Table,
   TableTh,
   UserTd,
   LightTd,
   TableBadge,
-  TableTitle,
-  TableContainer,
   RowWithBorder,
   FoodTd,
   FoodText,
+  TableBody,
 } from './ParticipantsTable.styled';
-import { TableBody } from '@mui/material';
-
-const participantsList = [
-  {
-    id: 1,
-    name: 'James',
-    position: 'Developer',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'halal',
-  },
-  {
-    id: 2,
-    name: 'Alice',
-    position: 'Designer',
-    job: 'Professor',
-    phone: '+821012341234',
-    food: 'normal',
-  },
-  {
-    id: 3,
-    name: 'Sarah',
-    position: 'Entrepreneur',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'vegan',
-  },
-];
 
 const foodColor = {
   halal: '#FFD400',
@@ -49,10 +19,9 @@ const foodColor = {
 
 const COLUMN_NAME = ['No.', 'Name', 'Position', 'Job', 'Phone', 'Food'];
 
-export const ParticipantsList = () => {
+export const ParticipantsList = ({ participantsList }) => {
   return (
-    <TableContainer>
-      <TableTitle>Participant</TableTitle>
+    <>
       <Table>
         <TableBody>
           <tr>
@@ -85,6 +54,6 @@ export const ParticipantsList = () => {
             ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </>
   );
 };
