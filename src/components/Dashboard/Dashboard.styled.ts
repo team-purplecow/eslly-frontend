@@ -7,6 +7,7 @@ export const DashboardContainer = styled.main`
   width: 100%;
   padding: 48px;
   background-color: #f1f2f4;
+  overflow: auto;
 `;
 
 export const DashboardSection = styled.section<{
