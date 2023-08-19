@@ -35,7 +35,7 @@ export const HeaderSearchBox = styled.div`
 `;
 
 export const HeaderSearchInput = styled.input`
-  width: 240px;
+  width: 301px;
   height: 100%;
   padding: 0;
   background-color: transparent;

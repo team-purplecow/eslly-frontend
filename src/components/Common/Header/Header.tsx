@@ -22,7 +22,7 @@ export const Header = () => {
         }}
       >
         <SvgIcon component={Search} sx={{ fontSize: 32 }} />
-        <HeaderSearchInput ref={inputRef} placeholder='참여자 이름을 검색해주세요' />
+        <HeaderSearchInput ref={inputRef} placeholder='search the name of participant' />
       </HeaderSearchBox>
       <HeaderLogoutLink href={'/logout'}>
         <SvgIcon component={Logout} sx={{ fontSize: 32 }} />
