@@ -16,6 +16,7 @@ export const LogoBox = styled.div`
   align-items: center;
   width: 236px;
   height: 54px;
+  margin-right: 96px;
   font-size: 46px;
   font-weight: bold;
 `;
