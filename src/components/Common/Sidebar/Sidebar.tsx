@@ -7,7 +7,7 @@ import { Menu, MenuContainer, MenuList, SidebarContainer } from './Sidebar.style
 
 const menuList = [
   { name: 'Dash Board', id: 0, icon: <SpeedIcon />, path: '/' },
-  { name: 'User List', id: 1, icon: <PermIdentityIcon />, path: '/participants' },
+  { name: 'Participant', id: 1, icon: <PermIdentityIcon />, path: '/participants' },
   { name: 'Setting', id: 2, icon: <SettingsOutlinedIcon />, path: '/settings' },
 ];
 

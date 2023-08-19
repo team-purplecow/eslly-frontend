@@ -97,3 +97,8 @@ export const TableTitle = styled.h3`
   font-size: 26px;
   font-weight: 600;
 `;
+
+export const FilterContainer = styled.div`
+  display: flex;
+  gap: 20px;
+`;
