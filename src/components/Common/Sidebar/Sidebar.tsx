@@ -1,34 +1,24 @@
-import { useEffect, useState } from 'react';
-import {
-  Children,
-  SidebarContainer,
-  SidebarWrapper,
-  SidebarLogoWrapper,
-  SidebarLogo,
-  SidebarBrand,
-} from './Sidebar.styled';
-import SidebarItems from './SidebarItems';
+import { MenuContainer, MenuList, Menu, SidebarContainer } from './Sidebar.styled';
 
 export const Sidebar = () => {
-  const [displaySidebar, setDisplaySidebar] = useState(false);
-
   return (
-    <>
-      <SidebarContainer displaySidebar={displaySidebar}>
-        <SidebarWrapper>
-          <SidebarLogoWrapper displaySidebar={displaySidebar}>
-            <SidebarLogo href='#'>
-              <span className='app-brand-logo demo'>
-                {/* <img src={BrandLogo} alt='Brand logo' /> */}
-              </span>
-              <SidebarBrand displaySidebar={displaySidebar} className='app__brand__text'>
-                Logo
-              </SidebarBrand>
-            </SidebarLogo>
-          </SidebarLogoWrapper>
-          <SidebarItems displaySidebar={displaySidebar} />
-        </SidebarWrapper>
-      </SidebarContainer>
-    </>
+    <SidebarContainer>
+      <MenuContainer>
+        <MenuList>
+          <Menu>
+            <h3>Dashboard</h3>
+          </Menu>
+          <Menu>
+            <h3>Projects</h3>
+          </Menu>
+          <Menu>
+            <h3>Invoices</h3>
+          </Menu>
+          <Menu>
+            <h3>Reports</h3>
+          </Menu>
+        </MenuList>
+      </MenuContainer>
+    </SidebarContainer>
   );
 };
