@@ -1,3 +1,4 @@
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Filter } from 'src/components/ParticipantsList/Filter';
 import {
   ParticipantsContainer,
@@ -14,178 +15,9 @@ const FILTERS = [
   { name: 'Position', value: 'position' },
 ];
 
-const participantsList = [
-  {
-    id: 1,
-    name: 'James',
-    position: 'Developer',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'halal',
-  },
-  {
-    id: 2,
-    name: 'Alice',
-    position: 'Designer',
-    job: 'Professor',
-    phone: '+821012341234',
-    food: 'normal',
-  },
-  {
-    id: 3,
-    name: 'Sarah',
-    position: 'Entrepreneur',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'vegan',
-  },
-  {
-    id: 1,
-    name: 'James',
-    position: 'Developer',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'halal',
-  },
-  {
-    id: 2,
-    name: 'Alice',
-    position: 'Designer',
-    job: 'Professor',
-    phone: '+821012341234',
-    food: 'normal',
-  },
-  {
-    id: 3,
-    name: 'Sarah',
-    position: 'Entrepreneur',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'vegan',
-  },
-  {
-    id: 1,
-    name: 'James',
-    position: 'Developer',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'halal',
-  },
-  {
-    id: 2,
-    name: 'Alice',
-    position: 'Designer',
-    job: 'Professor',
-    phone: '+821012341234',
-    food: 'normal',
-  },
-  {
-    id: 3,
-    name: 'Sarah',
-    position: 'Entrepreneur',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'vegan',
-  },
-  {
-    id: 1,
-    name: 'James',
-    position: 'Developer',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'halal',
-  },
-  {
-    id: 2,
-    name: 'Alice',
-    position: 'Designer',
-    job: 'Professor',
-    phone: '+821012341234',
-    food: 'normal',
-  },
-  {
-    id: 3,
-    name: 'Sarah',
-    position: 'Entrepreneur',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'vegan',
-  },
-  {
-    id: 1,
-    name: 'James',
-    position: 'Developer',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'halal',
-  },
-  {
-    id: 2,
-    name: 'Alice',
-    position: 'Designer',
-    job: 'Professor',
-    phone: '+821012341234',
-    food: 'normal',
-  },
-  {
-    id: 3,
-    name: 'Sarah',
-    position: 'Entrepreneur',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'vegan',
-  },
-  {
-    id: 1,
-    name: 'James',
-    position: 'Developer',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'halal',
-  },
-  {
-    id: 2,
-    name: 'Alice',
-    position: 'Designer',
-    job: 'Professor',
-    phone: '+821012341234',
-    food: 'normal',
-  },
-  {
-    id: 3,
-    name: 'Sarah',
-    position: 'Entrepreneur',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'vegan',
-  },
-  {
-    id: 1,
-    name: 'James',
-    position: 'Developer',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'halal',
-  },
-  {
-    id: 2,
-    name: 'Alice',
-    position: 'Designer',
-    job: 'Professor',
-    phone: '+821012341234',
-    food: 'normal',
-  },
-  {
-    id: 3,
-    name: 'Sarah',
-    position: 'Entrepreneur',
-    job: 'Student',
-    phone: '+821012341234',
-    food: 'vegan',
-  },
-];
-
-const Participants = () => (
+const Participants: InferGetServerSidePropsType<typeof getServerSideProps> = ({
+  participantsList,
+}) => (
   <ParticipantsContainer>
     <TableContainer>
       <TableHeader>
@@ -196,5 +28,25 @@ const Participants = () => (
     </TableContainer>
   </ParticipantsContainer>
 );
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const participantsList = await fetch(`https://solumjunction.store/api/users`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      console.error(err);
+      return [];
+    });
+
+  return {
+    props: { participantsList },
+  };
+};
 
 export default Participants;
