@@ -1,9 +1,14 @@
+import { CategoryScale } from 'chart.js';
+import Chart from 'chart.js/auto';
+import { Line } from 'react-chartjs-2';
+import { data, options } from './Dashboard.const';
 import {
   DashboardBlock,
   DashboardContainer,
   DashboardPositionNumberBox,
   DashboardSection,
 } from './Dashboard.styled';
+Chart.register(CategoryScale);
 
 export const Dashboard = () => {
   return (
@@ -52,6 +57,14 @@ export const Dashboard = () => {
             <h2>
               Statistics <small>2023.08.19. 기준</small>
             </h2>
+            <div
+              style={{
+                width: '100%',
+                height: 'calc(100% - 30px)',
+              }}
+            >
+              <Line options={options} data={data} />
+            </div>
           </DashboardBlock>
         </DashboardSection>
         <DashboardBlock height='202px'>
