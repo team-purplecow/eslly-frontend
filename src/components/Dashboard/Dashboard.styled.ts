@@ -87,3 +87,22 @@ export const DashboardBoothBox = styled.div`
     font-size: 30px;
   }
 `;
+
+export const DashboardDoughnutDtBlock = styled.dt<{
+  backgroundColor: CSSProperties['backgroundColor'];
+}>`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  color: ${colorSet.black70};
+
+  ::before {
+    content: '';
+    display: flex;
+    width: 14px;
+    height: 14px;
+    background-color: ${({ backgroundColor }) => backgroundColor};
+    border-radius: 12px;
+  }
+`;

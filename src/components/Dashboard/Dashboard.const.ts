@@ -1,8 +1,8 @@
 import { ComponentProps } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Doughnut, Line } from 'react-chartjs-2';
 import { colorSet } from 'src/shared/color';
 
-export const options: ComponentProps<typeof Line>['options'] = {
+export const lineOptions: ComponentProps<typeof Line>['options'] = {
   responsive: true,
   scales: {
     x: {
@@ -25,7 +25,7 @@ export const options: ComponentProps<typeof Line>['options'] = {
   },
 };
 
-export const data = {
+export const lineData = {
   labels: Array.from({ length: new Date().getDate() - 1 }, (_, i) => i + 1).slice(-11),
   datasets: [
     {
@@ -48,6 +48,20 @@ export const data = {
       data: [0, 0, 0, 0, 0, 0, 0, 0, 9, 13, 10, 7, 7, 10, 14, 16, 15, 20, 27].slice(-11),
       borderWidth: 2,
       borderColor: colorSet.point,
+    },
+  ],
+};
+
+export const doughnutOptions: ComponentProps<typeof Doughnut>['options'] = {};
+
+export const doughnutData: ComponentProps<typeof Doughnut>['data'] = {
+  datasets: [
+    {
+      data: [66, 34],
+      rotation: 90,
+      //@ts-expect-error - chartjs type error
+      cutout: '80%',
+      backgroundColor: [colorSet.point, colorSet.point20],
     },
   ],
 };
