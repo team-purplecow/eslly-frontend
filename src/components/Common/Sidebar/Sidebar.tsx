@@ -1,17 +1,23 @@
-import { useState } from 'react';
-import { MenuContainer, MenuList, Menu, SidebarContainer } from './Sidebar.styled';
-import DashboardIcon from '@mui/icons-material/Dashboard';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import SpeedIcon from '@mui/icons-material/Speed';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { Menu, MenuContainer, MenuList, SidebarContainer } from './Sidebar.styled';
 
 const menuList = [
-  { name: 'dashboard', id: 0, icon: <DashboardIcon /> },
-  { name: 'user list', id: 1, icon: <PermIdentityIcon /> },
-  { name: 'setting', id: 2, icon: <SettingsOutlinedIcon /> },
+  { name: 'Dash Board', id: 0, icon: <SpeedIcon />, path: '/' },
+  { name: 'User List', id: 1, icon: <PermIdentityIcon />, path: '/participants' },
+  { name: 'Setting', id: 2, icon: <SettingsOutlinedIcon />, path: '/settings' },
 ];
 
 export const Sidebar = () => {
   const [activeItem, setActiveItem] = useState(0);
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push(menuList[activeItem].path);
+  }, [activeItem]);
 
   return (
     <SidebarContainer>
