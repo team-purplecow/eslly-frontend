@@ -10,6 +10,7 @@ import {
   FoodText,
   TableBody,
 } from './ParticipantsTable.styled';
+import Link from 'next/link';
 
 const foodColor = {
   halal: '#FFD400',
@@ -48,7 +49,9 @@ export const ParticipantsList = ({ participantsList }) => {
                 </td>
 
                 <td>
-                  <TableBadge>Details</TableBadge>
+                  <Link href={`participants/${item.id}`}>
+                    <TableBadge>Details</TableBadge>
+                  </Link>
                 </td>
               </RowWithBorder>
             ))}
