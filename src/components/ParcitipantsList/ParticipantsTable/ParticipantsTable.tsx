@@ -52,7 +52,7 @@ const COLUMN_NAME = ['No.', 'Name', 'Position', 'Job', 'Phone', 'Food'];
 export const ParticipantsList = () => {
   return (
     <TableContainer>
-      <TableTitle>Participants</TableTitle>
+      <TableTitle>Participant</TableTitle>
       <Table>
         <TableBody>
           <tr>

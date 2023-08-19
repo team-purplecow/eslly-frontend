@@ -8,13 +8,14 @@ interface Props {
 
 export const TableContainer = styled.div`
   flex: 2;
-  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
-  padding: 20px;
+  background-color: ${colorSet.black0};
+  padding: 0.5em 1em;
+  border-radius: 2em;
 `;
 export const TableTitle = styled.h3`
   font-size: 26px;
   font-weight: 600;
+  margin-bottom: 2em;
 `;
 export const TableBadge = styled.button<Props>`
   padding: 0.6em 1em;
@@ -71,6 +72,9 @@ export const FoodText = styled.div`
 export const RowWithBorder = styled.tr`
   border-bottom: 1px solid ${colorSet.black10};
   border-width: 1px;
+  &:hover {
+    background-color: ${colorSet.black5};
+  }
 `;
 
 export const TableBody = styled.tbody`
