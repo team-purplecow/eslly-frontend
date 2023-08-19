@@ -1,0 +1,18 @@
+export const colorSet = {
+  black0: '#ffffff',
+  black10: '#DDDDDD',
+  black20: '#BEBEBE',
+  black30: '#989898',
+  black50: '#7D7D7D',
+  black60: '#696969',
+  black70: '#4D4D4D',
+  black90: '#313131',
+  black100: '#1D1D1D',
+  point10: '#F2E2FE',
+  point20: '#D8A7FF',
+  point30: '#B263F0',
+  point: '#9332E0',
+  point70: '#770DCA',
+  point80: '#5C02A4',
+  point90: '#440079',
+};
