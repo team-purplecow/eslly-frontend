@@ -4,17 +4,6 @@ interface Props {
   displaySidebar?: boolean;
 }
 
-// Children Component
-export const Children = styled.div<Props>`
-  width: 100%;
-  height: 100%;
-  margin-left: 15rem;
-
-  @media (max-width: 468px) {
-    margin-left: 5rem;
-  }
-`;
-
 export const SidebarWrapper = styled.div`
   width: 100%;
   height: 100%;

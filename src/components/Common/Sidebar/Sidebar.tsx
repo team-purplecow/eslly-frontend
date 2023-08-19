@@ -6,11 +6,10 @@ import {
   SidebarLogoWrapper,
   SidebarLogo,
   SidebarBrand,
-  SidebarToggler,
 } from './Sidebar.styled';
 import SidebarItems from './SidebarItems';
 
-export const Sidebar = ({ children }) => {
+export const Sidebar = () => {
   const [displaySidebar, setDisplaySidebar] = useState(false);
 
   return (
@@ -23,14 +22,13 @@ export const Sidebar = ({ children }) => {
                 {/* <img src={BrandLogo} alt='Brand logo' /> */}
               </span>
               <SidebarBrand displaySidebar={displaySidebar} className='app__brand__text'>
-                Frest
+                Logo
               </SidebarBrand>
             </SidebarLogo>
           </SidebarLogoWrapper>
           <SidebarItems displaySidebar={displaySidebar} />
         </SidebarWrapper>
       </SidebarContainer>
-      <Children displaySidebar={displaySidebar}>{children}</Children>
     </>
   );
 };
