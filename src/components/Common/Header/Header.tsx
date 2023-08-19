@@ -1,10 +1,10 @@
-import { HeaderContainer, LogoBox } from './Header.styled';
-import tempLogo from 'Assets/';
+import { HeaderContainer } from './Header.styled';
 
 export const Header = () => {
   return (
     <HeaderContainer>
-      <LogoBox src={} alt={''} />
+      {/* <LogoBox src={} alt={''} /> */}
+      here is header
     </HeaderContainer>
   );
 };

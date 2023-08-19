@@ -1,13 +1,6 @@
 import { css } from '@emotion/react';
-import {
-  Animated,
-  Basic,
-  BasicExtended,
-  Combined,
-  ComponentSelectorsExtended,
-  Pink,
-  bounce,
-} from '../shared/styles';
+import { Header } from 'src/components/Common/Header';
+import { Sidebar } from 'src/components/Common/Sidebar/Sidebar';
 
 const Home = () => (
   <div
@@ -16,15 +9,10 @@ const Home = () => (
       flex-direction: column;
     `}
   >
-    <Basic>Cool Styles</Basic>
-    <Pink>Pink text</Pink>
-    <Combined>
-      With <code>:hover</code>.
-    </Combined>
-    <Animated animation={bounce}>Let's bounce.</Animated>
-    <ComponentSelectorsExtended>
-      <BasicExtended>Nested</BasicExtended>
-    </ComponentSelectorsExtended>
+    <Header />
+    <Sidebar>
+      <div>대시보드 내용입니다.</div>
+    </Sidebar>
   </div>
 );
 
