@@ -9,7 +9,7 @@ const Register = ({ userId }) => {
       finishDate: '2023-08-26',
     };
 
-    fetch('http://solumjunction.store/api/event/save', {
+    fetch('https://solumjunction.store/api/event/save', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
