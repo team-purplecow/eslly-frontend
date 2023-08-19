@@ -76,6 +76,7 @@ export const ParticipantsContainer = styled.div`
   flex: 2;
   padding: 2em;
   background-color: #f1f2f4;
+  overflow-y: auto;
 `;
 
 export const TableContainer = styled.div`

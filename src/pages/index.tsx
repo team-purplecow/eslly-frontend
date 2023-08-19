@@ -1,3 +1,9 @@
-const Home = () => <div>여기는 홈입니다.</div>;
+import dynamic from 'next/dynamic';
+
+const Dashboard = dynamic(() => import('../components/Dashboard').then((mod) => mod.Dashboard), {
+  ssr: false,
+});
+
+const Home = () => <Dashboard />;
 
 export default Home;
