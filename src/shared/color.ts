@@ -15,4 +15,5 @@ export const colorSet = {
   point70: '#770DCA',
   point80: '#5C02A4',
   point90: '#440079',
+  gray: '#656575',
 };
