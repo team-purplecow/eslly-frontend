@@ -9,6 +9,7 @@ import {
 import background from 'src/assets/image/background.png';
 import styled from '@emotion/styled';
 import { colorSet } from 'src/shared/color';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 const NameTagContainer = styled.div`
   position: relative;
@@ -87,76 +88,105 @@ const Bingo = styled.div<{ isVisited?: boolean }>`
 `;
 
 //please generate 16 unigue list
-const mockBingo = [
-  { name: 'APPLE', isVisited: false },
-  { name: 'SAMSUNG', isVisited: false },
-  { name: 'ARIRANG', isVisited: true },
-  { name: 'SOLUM', isVisited: false },
-  { name: 'APPLE2', isVisited: false },
-  { name: 'SAMSUNG2', isVisited: false },
-  { name: 'ARIRANG2', isVisited: false },
-  { name: 'SOLUM2', isVisited: false },
-  { name: 'APPLE3', isVisited: true },
-  { name: 'SAMSUNG3', isVisited: false },
-  { name: 'ARIRANG3', isVisited: false },
-  { name: 'SOLUM3', isVisited: false },
-  { name: 'APPLE4', isVisited: false },
-  { name: 'SAMSUNG4', isVisited: false },
-  { name: 'ARIRANG4', isVisited: false },
-  { name: 'SOLUM4', isVisited: false },
-];
 
-const ParticipantsDetail = ({ userId }) => (
-  <ParticipantsContainer>
-    <TableContainer>
-      <TableHeader>
-        <TableTitle>Participant {userId}</TableTitle>
-      </TableHeader>
-      <div style={{ display: 'flex' }}>
-        <NameTagContainer>
-          <NameOverlay>
-            <div className='text'>
-              <h3>SOLUM</h3>
-              <h1>PARTICIPANT</h1>
-              <h2>Designer</h2>
-              <OpacityContainer>KIM SEOYONG</OpacityContainer>
-            </div>
-          </NameOverlay>
-          <Image
-            src={background}
-            alt='메인 배경 이미지'
-            layout='fill'
-            objectFit='contain'
-            objectPosition='center'
-          />
-        </NameTagContainer>
+const ParticipantsDetail: InferGetServerSidePropsType<typeof getServerSideProps> = ({
+  userId,
+  isVisited,
+}) => {
+  const mockBingo = [
+    { name: 'APPLE', isVisited: false },
+    { name: 'GROUPBY', isVisited: false },
+    { name: 'ARIRANG', isVisited: true },
+    { name: 'SOLUM', isVisited: isVisited },
+    { name: 'CNT Tech', isVisited: false },
+    { name: 'Ground K', isVisited: false },
+    { name: 'HELPRO', isVisited: false },
+    { name: 'SAMSUNG', isVisited: false },
+    { name: 'NoriS', isVisited: true },
+    { name: 'NAVER', isVisited: false },
+    { name: 'bto', isVisited: false },
+    { name: 'QUPANG', isVisited: false },
+    { name: 'KEPLY', isVisited: false },
+    { name: 'AGROSDYNE', isVisited: false },
+    { name: 'Shinhan Card', isVisited: false },
+    { name: 'JAKA', isVisited: false },
+  ];
 
-        <NameTagContainer>
-          <BingoOverlay>
-            {mockBingo.map((item) => (
-              <Bingo style={{ color: 'white' }} isVisited={item.isVisited}>
-                {item.name}
-              </Bingo>
-            ))}
-          </BingoOverlay>
-          <Image
-            src={background}
-            alt='메인 배경 이미지'
-            layout='fill'
-            objectFit='contain'
-            objectPosition='center'
-          />
-        </NameTagContainer>
-      </div>
-    </TableContainer>
-  </ParticipantsContainer>
-);
+  return (
+    <ParticipantsContainer>
+      <TableContainer>
+        <TableHeader>
+          <TableTitle>Participant {userId}</TableTitle>
+        </TableHeader>
+        <div style={{ display: 'flex' }}>
+          <NameTagContainer>
+            <NameOverlay>
+              <div className='text'>
+                <h3>SOLUM</h3>
+                <h1>PARTICIPANT</h1>
+                <h2>Designer</h2>
+                <OpacityContainer>KIM SEOYONG</OpacityContainer>
+              </div>
+            </NameOverlay>
+            <Image
+              src={background}
+              alt='메인 배경 이미지'
+              layout='fill'
+              objectFit='contain'
+              objectPosition='center'
+            />
+          </NameTagContainer>
 
-ParticipantsDetail.getInitialProps = (context) => {
+          <NameTagContainer>
+            <BingoOverlay>
+              {mockBingo.map((item) => (
+                <Bingo style={{ color: 'white' }} isVisited={item.isVisited}>
+                  {item.name}
+                </Bingo>
+              ))}
+            </BingoOverlay>
+            <Image
+              src={background}
+              alt='메인 배경 이미지'
+              layout='fill'
+              objectFit='contain'
+              objectPosition='center'
+            />
+          </NameTagContainer>
+        </div>
+      </TableContainer>
+    </ParticipantsContainer>
+  );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // const res = await fetch('https://api.github.com/repos/vercel/next.js');
+  // const repo = await res.json();
+  // return { props: { repo } };
+
   const { userId } = context.query;
 
+  const visitedList = await fetch(
+    `https://solumjunction.store/api/visit/company/${userId}?companyName=NAVER'`,
+    {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    }
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      console.error(err);
+      return [];
+    });
+
+  const isVisited = visitedList.companyVisitList.some((item) => item.companyName === 'SOLUM');
+
   return {
-    userId,
+    props: { userId, isVisited },
   };
 };
 
