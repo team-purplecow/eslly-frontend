@@ -29,17 +29,18 @@ export const MenuList = styled.ul`
 `;
 
 export const Menu = styled.li`
+  padding-left: 1em;
   margin-block-start: 0;
   display: flex;
   gap: 1rem;
   cursor: pointer;
+  align-items: center;
   h3 {
     font-weight: 300;
     color: #7d7d7d;
   }
   svg {
     font-size: 1.1rem;
-    margin-top: 3%;
   }
   &.active {
     h3 {
