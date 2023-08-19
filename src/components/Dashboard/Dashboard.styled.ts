@@ -17,7 +17,7 @@ export const DashboardSection = styled.section<{
   gap: 24px;
 `;
 
-export const DashboardBlock = styled.article<{
+export const DashboardBox = styled.article<{
   width?: `${string}px`;
   height?: `${string}px`;
 }>`
@@ -61,5 +61,29 @@ export const DashboardPositionNumberBox = styled.div`
 
   strong {
     font-size: 42px;
+  }
+`;
+
+export const DashboardBoothBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 20px 29px;
+  background-color: ${colorSet.black05};
+  border-radius: 20px;
+
+  > h3 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    color: ${colorSet.black60};
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  > strong {
+    font-size: 30px;
   }
 `;

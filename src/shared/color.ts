@@ -1,6 +1,7 @@
 export const colorSet = {
   black0: '#ffffff',
   black5: '#F6F6F6',
+  black05: '#F6F6F6',
   black10: '#DDDDDD',
   black20: '#BEBEBE',
   black30: '#989898',
