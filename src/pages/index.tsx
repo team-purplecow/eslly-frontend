@@ -1,3 +1,5 @@
-const Home = () => <div>여기는 홈입니다.</div>;
+import { Dashboard } from 'src/components/Dashboard';
+
+const Home = () => <Dashboard />;
 
 export default Home;

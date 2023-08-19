@@ -10,6 +10,10 @@ export const globalStyles = (
         font-family: Pretendard Variable;
         font-size: 24px;
       }
+
+      * {
+        box-sizing: border-box;
+      }
     `}
   />
 );
