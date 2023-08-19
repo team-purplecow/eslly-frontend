@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const SidebarContainer = styled.div`
-  width: 20%;
+  width: 16%;
   height: 100% !important;
   display: flex;
   flex-direction: column;
@@ -20,6 +20,8 @@ export const MenuContainer = styled.div`
 `;
 
 export const MenuList = styled.ul`
+  list-style-position: inside;
+  padding-left: 0;
   list-style-type: none;
   display: flex;
   flex-direction: column;
@@ -27,18 +29,23 @@ export const MenuList = styled.ul`
 `;
 
 export const Menu = styled.li`
-  margin-left: 25%;
-  margin-bottom: 2rem;
+  margin-block-start: 0;
   display: flex;
   gap: 1rem;
-  color: #e4e4e4;
   cursor: pointer;
   h3 {
     font-weight: 300;
-    color: #000000;
+    color: #7d7d7d;
   }
   svg {
     font-size: 1.1rem;
     margin-top: 3%;
+  }
+  &.active {
+    h3 {
+      font-weight: bold;
+      color: #000000;
+    }
+    background-color: #dbe4f3;
   }
 `;
