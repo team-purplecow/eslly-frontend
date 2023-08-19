@@ -26,7 +26,7 @@ export const lineOptions: ComponentProps<typeof Line>['options'] = {
 };
 
 export const lineData = {
-  labels: Array.from({ length: new Date().getDate() - 1 }, (_, i) => i + 1).slice(-11),
+  labels: Array.from({ length: 11 }, (_, i) => i + 9),
   datasets: [
     {
       label: 'Visitors',
@@ -45,7 +45,7 @@ export const lineData = {
         return gradientBackground;
       },
       tension: 0.4,
-      data: [0, 0, 0, 0, 0, 0, 0, 0, 9, 13, 10, 7, 7, 10, 14, 16, 15, 20, 27].slice(-11),
+      data: [9, 13, 10, 7, 7, 10, 14, 16, 15, 20, 27],
       borderWidth: 2,
       borderColor: colorSet.point,
     },
