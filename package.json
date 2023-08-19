@@ -12,6 +12,7 @@
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.5",
     "chart.js": "^4.3.3",
+    "chartjs-plugin-zoom": "^2.0.1",
     "next": "^13.4.19",
     "normalize.css": "^8.0.1",
     "react": "18.2.0",

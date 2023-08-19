@@ -620,6 +620,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chartjs-plugin-zoom@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "chartjs-plugin-zoom@npm:2.0.1"
+  dependencies:
+    hammerjs: ^2.0.8
+  peerDependencies:
+    chart.js: ">=3.2.0"
+  checksum: c0ca5ae475bc3c7263e471258a7f16bd3d92c3642ded1395aeb841c9710d5af83e80410aa5e34869c4a1a5cc3899a166aec06a59bf9ecfda85f564618528b286
+  languageName: node
+  linkType: hard
+
 "client-only@npm:0.0.1":
   version: 0.0.1
   resolution: "client-only@npm:0.0.1"
@@ -735,6 +746,13 @@ __metadata:
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
   checksum: ac85f94da92d8eb6b7f5a8b20ce65e43d66761c55ce85ac96df6865308390da45a8d3f0296dd3a663de65d30ba497bd46c696cc1e248c72b13d6d567138a4fc7
+  languageName: node
+  linkType: hard
+
+"hammerjs@npm:^2.0.8":
+  version: 2.0.8
+  resolution: "hammerjs@npm:2.0.8"
+  checksum: b092da7d1565a165d7edb53ef0ce212837a8b11f897aa3cf81a7818b66686b0ab3f4747fbce8fc8a41d1376594639ce3a054b0fd4889ca8b5b136a29ca500e27
   languageName: node
   linkType: hard
 
@@ -1077,6 +1095,7 @@ __metadata:
     "@types/react": 18.0.15
     "@types/react-dom": 18.0.6
     chart.js: ^4.3.3
+    chartjs-plugin-zoom: ^2.0.1
     next: ^13.4.19
     normalize.css: ^8.0.1
     react: 18.2.0
