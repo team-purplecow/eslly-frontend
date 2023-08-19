@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
+import { colorSet } from 'src/shared/color';
 
 export const SidebarContainer = styled.div`
-  width: 16%;
+  min-width: 332px;
   height: 100% !important;
   display: flex;
   flex-direction: column;
@@ -35,12 +36,21 @@ export const Menu = styled.li`
   gap: 1rem;
   cursor: pointer;
   align-items: center;
+  * {
+    transition: all 0.2s;
+  }
   h3 {
     font-weight: 300;
     color: #7d7d7d;
+    font-size: 24px;
   }
   svg {
-    font-size: 1.1rem;
+    padding: 8px;
+    background-color: ${colorSet.black10};
+    border-radius: 10px;
+    color: ${colorSet.black30};
+    font-size: 2.08333333rem;
+    transition: background-color 0.2s;
   }
   &.active {
     h3 {
@@ -48,5 +58,9 @@ export const Menu = styled.li`
       color: #000000;
     }
     background-color: #dbe4f3;
+    svg {
+      background-color: ${colorSet.point};
+      color: ${colorSet.black0};
+    }
   }
 `;
