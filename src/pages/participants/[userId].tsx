@@ -179,7 +179,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return [];
     });
 
-  const isVisited = visitedList.companyVisitList.some((item) => item.companyName === 'SOLUM');
+  const isVisited =
+    visitedList === undefined
+      ? visitedList.companyVisitList.some((item) => item.companyName === 'SOLUM')
+      : false;
 
   return {
     props: { userId, isVisited },

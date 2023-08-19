@@ -49,7 +49,7 @@ export const ParticipantsList = ({ participantsList }) => {
                 </td>
 
                 <td>
-                  <Link href={`participants/${item.id}`}>
+                  <Link href={`participants/${item.idx}`}>
                     <TableBadge>Details</TableBadge>
                   </Link>
                 </td>
