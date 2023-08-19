@@ -2,7 +2,11 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 
 import { Header } from 'src/components/Common/Header';
+import { Container } from 'src/components/Common/Container';
 import { globalStyles } from '../shared/styles';
+import { Sidebar } from 'src/components/Common/Sidebar';
+
+import 'normalize.css';
 
 const cache = createCache({ key: 'next' });
 
@@ -17,7 +21,10 @@ const App = ({ Component, pageProps }) => (
     <CacheProvider value={cache}>
       {globalStyles}
       <Header />
-      <Component {...pageProps} />
+      <Container>
+        <Sidebar />
+        <Component {...pageProps} />
+      </Container>
     </CacheProvider>
   </>
 );

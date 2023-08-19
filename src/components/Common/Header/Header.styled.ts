@@ -5,4 +5,4 @@ export const HeaderContainer = styled.header`
   height: 136px;
 `;
 
-export const LogoBox = styled(Image)``;
+// export const LogoBox = styled(Image)``;
