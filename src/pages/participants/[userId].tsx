@@ -195,7 +195,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     });
 
   const isVisited =
-    visitedList === undefined
+    visitedList !== undefined
       ? visitedList.companyVisitList.some((item) => item.companyName === 'SOLUM')
       : false;
 
