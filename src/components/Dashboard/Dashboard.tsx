@@ -1,10 +1,11 @@
 import { FileDownloadOutlined } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Doughnut, Line } from 'react-chartjs-2';
 import junctionCircle from 'src/assets/junction-circle.png';
 import { colorSet } from 'src/shared/color';
@@ -22,8 +23,52 @@ import {
 Chart.register(CategoryScale);
 Chart.register(zoomPlugin);
 
+const exportJsonData = (json_data) => {
+  const json_array = json_data;
+
+  let csv_string = '';
+  const titles = Object.keys(json_array[0]);
+
+  titles.forEach((title, index) => {
+    csv_string += index !== titles.length - 1 ? `${title},` : `${title}\r\n`;
+  });
+
+  json_array.forEach((content, index) => {
+    let row = ''; // 각 인덱스에 해당하는 '내용'을 담을 행
+
+    for (let title in content) {
+      row += row === '' ? `${content[title]}` : `,${content[title]}`;
+    }
+    csv_string += index !== json_array.length - 1 ? `${row}\r\n` : `${row}`;
+  });
+
+  let uri = 'data:text/csv;charset=utf-8,' + escape(csv_string);
+  let link = document.createElement('a');
+  link.href = uri;
+  link.download = 'visiterInfo' + '.csv';
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
 export const Dashboard = () => {
   const selectRef = useRef<HTMLSelectElement>(null);
+  const { data: event } = useQuery(['event'], () =>
+    fetch(`https://solumjunction.store/api/event/1`).then((res) => res.json())
+  );
+  const { data: percent } = useQuery(['percent'], () =>
+    fetch(`https://solumjunction.store/api/users/percentage`).then((res) => res.json())
+  );
+  const { data: companies } = useQuery(['company'], () =>
+    fetch(`https://solumjunction.store/api/company/list`).then((res) => res.json())
+  );
+
+  useEffect(() => {
+    if (percent) {
+      doughnutData.datasets[0].data = [percent.M, percent.W];
+    }
+  }, [percent]);
 
   const mockData = [
     {
@@ -33,34 +78,19 @@ export const Dashboard = () => {
     },
   ];
 
-  const exportJsonData = (json_data) => {
-    const json_array = json_data;
-
-    let csv_string = '';
-    const titles = Object.keys(json_array[0]);
-
-    titles.forEach((title, index) => {
-      csv_string += index !== titles.length - 1 ? `${title},` : `${title}\r\n`;
-    });
-
-    json_array.forEach((content, index) => {
-      let row = ''; // 각 인덱스에 해당하는 '내용'을 담을 행
-
-      for (let title in content) {
-        row += row === '' ? `${content[title]}` : `,${content[title]}`;
-      }
-      csv_string += index !== json_array.length - 1 ? `${row}\r\n` : `${row}`;
-    });
-
-    let uri = 'data:text/csv;charset=utf-8,' + escape(csv_string);
-    let link = document.createElement('a');
-    link.href = uri;
-    link.download = 'visiterInfo' + '.csv';
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  if (!event || !percent || !companies)
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
+        loading...
+      </div>
+    );
 
   return (
     <DashboardContainer>
@@ -77,7 +107,7 @@ export const Dashboard = () => {
                   fontWeight: 'bold',
                 }}
               >
-                3,201
+                {event.total}
               </div>
             </DashboardBox>
             <DashboardBox width='553px' height='208px'>
@@ -91,15 +121,15 @@ export const Dashboard = () => {
               >
                 <DashboardPositionNumberBox>
                   <small>participants</small>
-                  <strong>2,995</strong>
+                  <strong>{event.positionInfo.PARTICIPANT}</strong>
                 </DashboardPositionNumberBox>
                 <DashboardPositionNumberBox>
                   <small>sponsors</small>
-                  <strong>104</strong>
+                  <strong>{event.positionInfo.SPONSOR}</strong>
                 </DashboardPositionNumberBox>
                 <DashboardPositionNumberBox>
                   <small>hosts</small>
-                  <strong>102</strong>
+                  <strong>{event.positionInfo.HOST}</strong>
                 </DashboardPositionNumberBox>
               </div>
             </DashboardBox>
@@ -128,50 +158,19 @@ export const Dashboard = () => {
               <Toggle label={['Total', 'Today']} style={{ marginLeft: 'auto' }} />
             </h2>
             <div style={{ display: 'flex', gap: 10 }}>
-              <DashboardBoothBox>
-                <h3>
-                  SOLUM
-                  <SvgIcon
-                    component={FileDownloadOutlined}
-                    sx={{ fontSize: 24, cursor: 'pointer' }}
-                    onClick={() => exportJsonData(mockData)}
-                  />
-                </h3>
-                <strong>2,011</strong>
-              </DashboardBoothBox>
-              <DashboardBoothBox>
-                <h3>
-                  APPLE
-                  <SvgIcon
-                    component={FileDownloadOutlined}
-                    sx={{ fontSize: 24, cursor: 'pointer' }}
-                    onClick={() => exportJsonData(mockData)}
-                  />
-                </h3>
-                <strong>1,900</strong>
-              </DashboardBoothBox>
-              <DashboardBoothBox>
-                <h3>
-                  SAMSUNG
-                  <SvgIcon
-                    component={FileDownloadOutlined}
-                    sx={{ fontSize: 24, cursor: 'pointer' }}
-                    onClick={() => exportJsonData(mockData)}
-                  />
-                </h3>
-                <strong>1,827</strong>
-              </DashboardBoothBox>
-              <DashboardBoothBox>
-                <h3>
-                  ARIRANG
-                  <SvgIcon
-                    component={FileDownloadOutlined}
-                    sx={{ fontSize: 24, cursor: 'pointer' }}
-                    onClick={() => exportJsonData(mockData)}
-                  />
-                </h3>
-                <strong>987</strong>
-              </DashboardBoothBox>
+              {companies.map((item) => (
+                <DashboardBoothBox key={'dashboard-' + item.title}>
+                  <h3>
+                    {item.title}
+                    <SvgIcon
+                      component={FileDownloadOutlined}
+                      sx={{ fontSize: 24, cursor: 'pointer' }}
+                      onClick={() => exportJsonData(mockData)}
+                    />
+                  </h3>
+                  <strong>{item.number}</strong>
+                </DashboardBoothBox>
+              ))}
             </div>
           </DashboardBox>
         </DashboardSection>
@@ -200,7 +199,7 @@ export const Dashboard = () => {
               >
                 <dt style={{ opacity: 0.6 }}>Total</dt>
                 <dd>
-                  <b>3,201</b>
+                  <b>{event.total}</b>
                 </dd>
               </div>
               <div
@@ -249,7 +248,7 @@ export const Dashboard = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   gap: 18,
-                  width: 166,
+                  width: 180,
                   margin: 0,
                 }}
               >
@@ -259,7 +258,7 @@ export const Dashboard = () => {
                   <DashboardDoughnutDtBlock backgroundColor={colorSet.point}>
                     man
                   </DashboardDoughnutDtBlock>
-                  <dd style={{ margin: 0, fontSize: 28, fontWeight: 'bold' }}>66%</dd>
+                  <dd style={{ margin: 0, fontSize: 28, fontWeight: 'bold' }}>{percent.M}%</dd>
                 </div>
                 <div
                   style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
@@ -267,7 +266,7 @@ export const Dashboard = () => {
                   <DashboardDoughnutDtBlock backgroundColor={colorSet.point20}>
                     woman
                   </DashboardDoughnutDtBlock>
-                  <dd style={{ margin: 0, fontSize: 28, color: colorSet.black50 }}>34%</dd>
+                  <dd style={{ margin: 0, fontSize: 28, color: colorSet.black50 }}>{percent.W}%</dd>
                 </div>
               </dl>
             </div>
