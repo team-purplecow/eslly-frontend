@@ -1,6 +1,9 @@
 import { Logout, Search } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useRef } from 'react';
+import logo from 'src/assets/image/logo.png';
 import {
   HeaderContainer,
   HeaderLogoutLink,
@@ -8,11 +11,10 @@ import {
   HeaderSearchInput,
   LogoBox,
 } from './Header.styled';
-import Image from 'next/image';
-import logo from 'src/assets/image/logo.png';
 
 export const Header = () => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   return (
     <HeaderContainer>
@@ -32,7 +34,16 @@ export const Header = () => {
         }}
       >
         <SvgIcon component={Search} sx={{ fontSize: 32 }} />
-        <HeaderSearchInput ref={inputRef} placeholder='search the name of participant' />
+        <HeaderSearchInput
+          ref={inputRef}
+          placeholder='search the name of participant'
+          // check if user press enter key
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              router.push(`/participants?name=${inputRef.current.value}`);
+            }
+          }}
+        />
       </HeaderSearchBox>
       <HeaderLogoutLink href={'/logout'}>
         <SvgIcon component={Logout} sx={{ fontSize: 32 }} />

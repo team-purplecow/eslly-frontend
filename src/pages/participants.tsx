@@ -1,4 +1,5 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { useRouter } from 'next/router';
 import { Filter } from 'src/components/ParticipantsList/Filter';
 import {
   FilterContainer,
@@ -32,20 +33,34 @@ const FILTERS_POSITION = [
 
 const Participants: InferGetServerSidePropsType<typeof getServerSideProps> = ({
   participantsList,
-}) => (
-  <ParticipantsContainer>
-    <TableContainer>
-      <TableHeader>
-        <TableTitle>Participant</TableTitle>
-        <FilterContainer>
-          <Filter filters={FILTERS_GENDER} /> <Filter filters={FILTERS_AGE} />
-          <Filter filters={FILTERS_POSITION} />
-        </FilterContainer>
-      </TableHeader>
-      <ParticipantsList participantsList={participantsList} />
-    </TableContainer>
-  </ParticipantsContainer>
-);
+}) => {
+  const router = useRouter();
+
+  return (
+    <ParticipantsContainer>
+      <TableContainer>
+        <TableHeader>
+          <TableTitle>Participant</TableTitle>
+          <FilterContainer>
+            <Filter filters={FILTERS_GENDER} /> <Filter filters={FILTERS_AGE} />
+            <Filter filters={FILTERS_POSITION} />
+          </FilterContainer>
+        </TableHeader>
+        <ParticipantsList
+          participantsList={
+            router.query.name
+              ? participantsList.filter((participant) =>
+                  participant.name
+                    .toLowerCase()
+                    .includes(router.query.name.toString().toLowerCase())
+                )
+              : participantsList
+          }
+        />
+      </TableContainer>
+    </ParticipantsContainer>
+  );
+};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const participantsList = await fetch(`https://solumjunction.store/api/users`, {
