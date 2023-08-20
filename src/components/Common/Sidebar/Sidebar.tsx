@@ -25,7 +25,7 @@ export const Sidebar = () => {
         <MenuList>
           {menuList.map((menu) => (
             <Menu
-              key={menu.id}
+              key={menu.name}
               onClick={() => setActiveItem(() => menu.id)}
               className={menu.id === activeItem ? 'active' : ''}
             >

@@ -1,16 +1,16 @@
 import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import Link from 'next/link';
 import {
-  Table,
-  TableTh,
-  UserTd,
-  LightTd,
-  TableBadge,
-  RowWithBorder,
   FoodTd,
   FoodText,
+  LightTd,
+  RowWithBorder,
+  Table,
+  TableBadge,
   TableBody,
+  TableTh,
+  UserTd,
 } from './ParticipantsTable.styled';
-import Link from 'next/link';
 
 const foodColor = {
   HALAL: '#FFD400',
@@ -27,12 +27,12 @@ export const ParticipantsList = ({ participantsList }) => {
         <TableBody>
           <tr>
             {COLUMN_NAME.map((name) => (
-              <TableTh>{name}</TableTh>
+              <TableTh key={name}>{name}</TableTh>
             ))}
           </tr>
           {participantsList &&
             participantsList.map((item) => (
-              <RowWithBorder key={item.id}>
+              <RowWithBorder key={`${item.id}-${item.idx}`}>
                 <LightTd>{item.idx}</LightTd>
                 <UserTd>
                   <span>{item.name}</span>

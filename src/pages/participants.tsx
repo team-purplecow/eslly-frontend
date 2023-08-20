@@ -1,12 +1,12 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Filter } from 'src/components/ParticipantsList/Filter';
 import {
+  FilterContainer,
   ParticipantsContainer,
   ParticipantsList,
   TableContainer,
   TableHeader,
   TableTitle,
-  FilterContainer,
 } from 'src/components/ParticipantsList/ParticipantsTable';
 
 const FILTERS_GENDER = [
@@ -20,7 +20,7 @@ const FILTERS_AGE = [
   { name: 'Age', value: 'age' },
   { name: '10-20', value: '1020' },
   { name: '20-30', value: '2030' },
-  { name: '30-40', value: '2030' },
+  { name: '30-40', value: '3040' },
 ];
 
 const FILTERS_POSITION = [
