@@ -39,15 +39,19 @@ export const ParticipantsList = ({ participantsList }) => {
                 </UserTd>
                 <LightTd>{item.position}</LightTd>
                 <LightTd>{item.job}</LightTd>
-                <LightTd>{item.phone}</LightTd>
-
+                <LightTd>
+                  {item.phone.slice(0, 3) +
+                    '-' +
+                    item.phone.slice(3, 7) +
+                    '-' +
+                    item.phone.slice(7, 11)}
+                </LightTd>
                 <td>
                   <FoodTd>
                     <RadioButtonCheckedIcon style={{ color: foodColor[item.food] }} />
                     <FoodText>{item.food}</FoodText>
                   </FoodTd>
                 </td>
-
                 <td>
                   <Link href={`participants/${item.idx}`}>
                     <TableBadge>Details</TableBadge>
