@@ -5,7 +5,7 @@ import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import Image from 'next/image';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Doughnut, Line } from 'react-chartjs-2';
 import junctionCircle from 'src/assets/junction-circle.png';
 import { colorSet } from 'src/shared/color';
@@ -31,6 +31,9 @@ Chart.register(zoomPlugin);
 
 export const Dashboard = () => {
   const selectRef = useRef<HTMLSelectElement>(null);
+  const lineRef = useRef(null);
+  const [boothFlag, setBoothFlag] = useState<boolean>(false);
+  const [statisticsFlag, setStatisticsFlag] = useState<boolean>(false);
   const { data: event } = useQuery(['event'], () =>
     fetch(`https://solumjunction.store/api/event/1`).then((res) => res.json())
   );
@@ -40,12 +43,26 @@ export const Dashboard = () => {
   const { data: companies } = useQuery(['company'], () =>
     fetch(`https://solumjunction.store/api/company/list`).then((res) => res.json())
   );
+  const { data: companiesToday } = useQuery(['companyToday'], () =>
+    fetch(`https://solumjunction.store/api/company/listToday`).then((res) => res.json())
+  );
 
   useEffect(() => {
     if (percent) {
       doughnutData.datasets[0].data = [percent.M, percent.W];
     }
   }, [percent]);
+
+  useEffect(() => {
+    const chart = lineRef.current;
+
+    if (chart) {
+      chart.data.datasets[0].data = statisticsFlag
+        ? [9, 13, 10, 7]
+        : [9, 13, 10, 7, 7, 10, 14, 16, 15, 20, 27];
+      chart.update();
+    }
+  }, [statisticsFlag]);
 
   const mockData = [
     {
@@ -115,7 +132,11 @@ export const Dashboard = () => {
             <DashboardBox height='390px' style={{ gap: 36 }}>
               <h2>
                 Statistics <small>2023.08.19. 기준</small>
-                <Toggle label={['Total', 'Today']} style={{ marginLeft: 'auto' }} />
+                <Toggle
+                  label={['Total', 'Today']}
+                  style={{ marginLeft: 'auto' }}
+                  onChecked={setStatisticsFlag}
+                />
               </h2>
               <div
                 style={{
@@ -125,17 +146,21 @@ export const Dashboard = () => {
                   height: 'calc(100% - 30px - 36px)',
                 }}
               >
-                <Line options={lineOptions} data={lineData} />
+                <Line ref={lineRef} options={lineOptions} data={lineData} />
               </div>
             </DashboardBox>
           </DashboardSection>
           <DashboardBox height='202px' style={{ gap: 10 }}>
             <h2>
               Booth <small style={{ fontSize: 26, fontWeight: 'bold' }}>16</small>
-              <Toggle label={['Total', 'Today']} style={{ marginLeft: 'auto' }} />
+              <Toggle
+                label={['Total', 'Today']}
+                style={{ marginLeft: 'auto' }}
+                onChecked={setBoothFlag}
+              />
             </h2>
             <div style={{ display: 'flex', gap: 10 }}>
-              {companies.map((item) => (
+              {(boothFlag ? companiesToday : companies).map((item) => (
                 <DashboardBoothBox key={'dashboard-' + item.title}>
                   <h3>
                     {item.title}
