@@ -1,6 +1,7 @@
 import { Logout, Search } from '@mui/icons-material';
 import { SvgIcon } from '@mui/material';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
 import logo from 'src/assets/image/logo.png';
@@ -19,13 +20,15 @@ export const Header = () => {
   return (
     <HeaderContainer>
       <LogoBox>
-        <Image
-          src={logo}
-          alt='메인 배경 이미지'
-          layout='fill'
-          objectFit='contain'
-          objectPosition='center'
-        />
+        <Link href='/'>
+          <Image
+            src={logo}
+            alt='메인 배경 이미지'
+            layout='fill'
+            objectFit='contain'
+            objectPosition='center'
+          />
+        </Link>
       </LogoBox>
       <HeaderSearchBox
         onClick={() => {

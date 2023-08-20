@@ -129,7 +129,7 @@ export const Dashboard = () => {
             <DashboardSection>
               <DashboardBox height='390px' style={{ gap: 36 }}>
                 <h2>
-                  Statistics <small>2023.08.19. 기준</small>
+                  Statistics <small>As of 2023.08.19.</small>
                   <Toggle
                     label={['Total', 'Today']}
                     style={{ marginLeft: 'auto' }}
