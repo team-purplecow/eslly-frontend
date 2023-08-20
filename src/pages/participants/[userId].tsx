@@ -92,6 +92,7 @@ const Bingo = styled.div<{ isVisited?: boolean }>`
 const ParticipantsDetail: InferGetServerSidePropsType<typeof getServerSideProps> = ({
   userId,
   isVisited,
+  userInfo,
 }) => {
   const mockBingo = [
     { name: 'APPLE', isVisited: false },
@@ -122,10 +123,10 @@ const ParticipantsDetail: InferGetServerSidePropsType<typeof getServerSideProps>
           <NameTagContainer>
             <NameOverlay>
               <div className='text'>
-                <h3>SOLUM</h3>
-                <h1>PARTICIPANT</h1>
-                <h2>Designer</h2>
-                <OpacityContainer>KIM SEOYONG</OpacityContainer>
+                <h3>{userInfo.job}</h3>
+                <h1>{userInfo.position}</h1>
+                <h2>{userInfo.position}</h2>
+                <OpacityContainer>{userInfo.name}</OpacityContainer>
               </div>
             </NameOverlay>
             <Image
@@ -160,10 +161,6 @@ const ParticipantsDetail: InferGetServerSidePropsType<typeof getServerSideProps>
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // const res = await fetch('https://api.github.com/repos/vercel/next.js');
-  // const repo = await res.json();
-  // return { props: { repo } };
-
   const { userId } = context.query;
 
   const visitedList = await fetch(
@@ -183,10 +180,27 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return [];
     });
 
-  const isVisited = visitedList.companyVisitList.some((item) => item.companyName === 'SOLUM');
+  const userInfo = await fetch(`https://solumjunction.store/api/users/${userId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      console.error(err);
+      return [];
+    });
+
+  const isVisited =
+    visitedList === undefined
+      ? visitedList.companyVisitList.some((item) => item.companyName === 'SOLUM')
+      : false;
 
   return {
-    props: { userId, isVisited },
+    props: { userId, isVisited, userInfo },
   };
 };
 

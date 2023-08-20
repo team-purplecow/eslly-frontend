@@ -13,9 +13,9 @@ import {
 import Link from 'next/link';
 
 const foodColor = {
-  halal: '#FFD400',
-  vegan: '#20AD20',
-  normal: '#F96DD1',
+  HALAL: '#FFD400',
+  VEGAN: '#20AD20',
+  NORMAL: '#F96DD1',
 };
 
 const COLUMN_NAME = ['No.', 'Name', 'Position', 'Job', 'Phone', 'Food'];
@@ -33,7 +33,7 @@ export const ParticipantsList = ({ participantsList }) => {
           {participantsList &&
             participantsList.map((item) => (
               <RowWithBorder key={item.id}>
-                <LightTd>{item.id}</LightTd>
+                <LightTd>{item.idx}</LightTd>
                 <UserTd>
                   <span>{item.name}</span>
                 </UserTd>
@@ -49,7 +49,7 @@ export const ParticipantsList = ({ participantsList }) => {
                 </td>
 
                 <td>
-                  <Link href={`participants/${item.id}`}>
+                  <Link href={`participants/${item.idx}`}>
                     <TableBadge>Details</TableBadge>
                   </Link>
                 </td>
