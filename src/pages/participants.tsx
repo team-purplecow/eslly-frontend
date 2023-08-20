@@ -26,9 +26,9 @@ const FILTERS_AGE = [
 
 const FILTERS_POSITION = [
   { name: 'Position', value: 'position' },
-  { name: 'Developer', value: 'developer' },
-  { name: 'Designer', value: 'designer' },
-  { name: 'Entrepreneur', value: 'entrepreneur' },
+  { name: 'Participant', value: 'Participant' },
+  { name: 'Sponsor', value: 'Sponsor' },
+  { name: 'Host', value: 'Host' },
 ];
 
 const Participants: InferGetServerSidePropsType<typeof getServerSideProps> = ({
