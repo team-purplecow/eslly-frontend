@@ -49,7 +49,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     if (percent) {
-      doughnutData.datasets[0].data = [percent.M, percent.W];
+      doughnutData.datasets[0].data = [percent.W, percent.M];
     }
   }, [percent]);
 
@@ -258,17 +258,17 @@ export const Dashboard = () => {
                   style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
                 >
                   <DashboardDoughnutDtBlock backgroundColor={colorSet.point}>
-                    man
+                    woman
                   </DashboardDoughnutDtBlock>
-                  <dd style={{ margin: 0, fontSize: 28, fontWeight: 'bold' }}>{percent.M}%</dd>
+                  <dd style={{ margin: 0, fontSize: 28, fontWeight: 'bold' }}>{percent.W}%</dd>
                 </div>
                 <div
                   style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
                 >
                   <DashboardDoughnutDtBlock backgroundColor={colorSet.point20}>
-                    woman
+                    man
                   </DashboardDoughnutDtBlock>
-                  <dd style={{ margin: 0, fontSize: 28, color: colorSet.black50 }}>{percent.W}%</dd>
+                  <dd style={{ margin: 0, fontSize: 28, color: colorSet.black50 }}>{percent.M}%</dd>
                 </div>
               </dl>
             </div>
