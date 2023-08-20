@@ -19,6 +19,12 @@ export const Sidebar = () => {
     router.push(menuList[activeItem].path);
   }, [activeItem]);
 
+  useEffect(() => {
+    const path = router.pathname;
+    const index = menuList.findLastIndex((menu) => path.includes(menu.path));
+    setActiveItem(index);
+  }, [router]);
+
   return (
     <SidebarContainer>
       <MenuContainer>
