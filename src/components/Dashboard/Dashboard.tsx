@@ -195,7 +195,17 @@ export const Dashboard = () => {
                 Event Period <b>23.08.18. ~ 08.20.</b>
               </p>
             </div>
-            <dl style={{ margin: 0, width: '100%', padding: '0 26px', fontSize: 28 }}>
+            <dl
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                margin: 0,
+                width: '100%',
+                padding: '0 26px',
+                fontSize: 28,
+                gap: 18,
+              }}
+            >
               <div
                 style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
               >
