@@ -154,7 +154,7 @@ export const Dashboard = () => {
           </DashboardSection>
           <DashboardBox height='202px' style={{ gap: 10 }}>
             <h2>
-              Booth <small style={{ fontSize: 26, fontWeight: 'bold' }}>{companies.length}</small>
+              Booth <small style={{ fontSize: 26, fontWeight: 'bold' }}>16</small>
               <Toggle label={['Total', 'Today']} style={{ marginLeft: 'auto' }} />
             </h2>
             <div style={{ display: 'flex', gap: 10 }}>
