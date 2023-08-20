@@ -11,7 +11,13 @@ import junctionCircle from 'src/assets/junction-circle.png';
 import { colorSet } from 'src/shared/color';
 import Controller from '../Common/Icon/Controller';
 import { Toggle } from '../Common/Toggle';
-import { doughnutData, doughnutOptions, lineData, lineOptions } from './Dashboard.const';
+import {
+  doughnutData,
+  doughnutOptions,
+  exportJsonData,
+  lineData,
+  lineOptions,
+} from './Dashboard.const';
 import {
   DashboardBoothBox,
   DashboardBox,
@@ -22,35 +28,6 @@ import {
 } from './Dashboard.styled';
 Chart.register(CategoryScale);
 Chart.register(zoomPlugin);
-
-const exportJsonData = (json_data) => {
-  const json_array = json_data;
-
-  let csv_string = '';
-  const titles = Object.keys(json_array[0]);
-
-  titles.forEach((title, index) => {
-    csv_string += index !== titles.length - 1 ? `${title},` : `${title}\r\n`;
-  });
-
-  json_array.forEach((content, index) => {
-    let row = ''; // 각 인덱스에 해당하는 '내용'을 담을 행
-
-    for (let title in content) {
-      row += row === '' ? `${content[title]}` : `,${content[title]}`;
-    }
-    csv_string += index !== json_array.length - 1 ? `${row}\r\n` : `${row}`;
-  });
-
-  let uri = 'data:text/csv;charset=utf-8,' + escape(csv_string);
-  let link = document.createElement('a');
-  link.href = uri;
-  link.download = 'visiterInfo' + '.csv';
-
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-};
 
 export const Dashboard = () => {
   const selectRef = useRef<HTMLSelectElement>(null);

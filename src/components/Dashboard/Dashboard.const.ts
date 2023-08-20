@@ -65,3 +65,32 @@ export const doughnutData: ComponentProps<typeof Doughnut>['data'] = {
     },
   ],
 };
+
+export const exportJsonData = (json_data) => {
+  const json_array = json_data;
+
+  let csv_string = '';
+  const titles = Object.keys(json_array[0]);
+
+  titles.forEach((title, index) => {
+    csv_string += index !== titles.length - 1 ? `${title},` : `${title}\r\n`;
+  });
+
+  json_array.forEach((content, index) => {
+    let row = ''; // 각 인덱스에 해당하는 '내용'을 담을 행
+
+    for (let title in content) {
+      row += row === '' ? `${content[title]}` : `,${content[title]}`;
+    }
+    csv_string += index !== json_array.length - 1 ? `${row}\r\n` : `${row}`;
+  });
+
+  let uri = 'data:text/csv;charset=utf-8,' + escape(csv_string);
+  let link = document.createElement('a');
+  link.href = uri;
+  link.download = 'visiterInfo' + '.csv';
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
